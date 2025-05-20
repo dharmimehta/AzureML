@@ -1,0 +1,13 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: src
+command: >-
+  python main.py 
+  --cataract-csv ${{inputs.cataract}}
+inputs:
+  diabetes:
+    path: azureml:cataract-data:1
+    mode: ro_mount
+environment: azureml:basic-env-scikit@latest
+compute: azureml:aml-instance
+experiment_name: cataract-data-example
+description: Train a classification model on Cataract data using a registered dataset as input.
